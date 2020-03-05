@@ -1,0 +1,23 @@
+name: "Roam Research backup"
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    name: Backup
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: npm install
+      - run: npm start
+        env:
+          ROAM_EMAIL: ${{ secrets.roamEmail }}
+          ROAM_PASSWORD: ${{ secrets.roamPassword }}
+          AWS_BUCKET_NAME: ${{ secrets.awsBucketName }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.awsAccessKeyId }}
+          AWS_ACCESS_KEY_SECRET: ${{ secrets.awsAccessKeySecret }}

@@ -1,0 +1,23 @@
+{
+  "name": "roam-backup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.633.0",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.6",
+    "puppeteer": "^2.1.1"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "start": "rimraf *.zip && rimraf *.png && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
