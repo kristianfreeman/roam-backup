@@ -1,6 +1,9 @@
 name: "Roam Research backup"
 
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron: "*/15 * * * *"
 
