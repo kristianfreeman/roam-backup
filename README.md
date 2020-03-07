@@ -1,4 +1,4 @@
-`roam-backup`
+# [[`roam-backup`]]
 
 Automate backing up JSON copies of your [Roam Research](https://roamresearch.com) data, using GitHub Actions and AWS S3.
 
@@ -6,17 +6,32 @@ Backups will be generated using Puppeteer and saved into the `backups` folder (`
 
 ## Usage
 
-To use it, just fork this repo and add the following [secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) to your repo (naming must match!):
+You can get `roam-backup` up and running in just a few minutes! The best part is that **you don't need to deploy anything!** 
 
-- roamEmail 
-- roamPassword
-- awsBucketName
-- awsAccessKeyId
-- awsAccessKeySecret
+Just follow these steps and you'll be on your way:
 
-AWS/S3 notes: the user that is represented by these access keys should have permissions to upload to an S3 bucket. I use `S3FullAccess` - if there's something else I should use, please let me know/open a PR to correct this README. The S3 bucket that the backups will upload to should already be created: this script won't create the bucket for you.
+1. Fork this repository.
+2. Enable Actions on the repository, as they get disabled upon forking.
+3. Setup an AWS S3 bucket to store your Roam backups:
 
-This is still fairly WIP, and this is my first project using Puppeteer, so it may be a little buggy.
+- Ensure you create the AWS S3 bucket manually –– this script will not create the bucket. Note the `awsBucketName` for step #4.
+- Create (or reuse) a user in the AWS console, and ensure it has permissions to upload to an S3 bucket (the `S3FullAccess` policy will guarantee it, but you can use a more conservative policy that simply enables upload). Note the `awsAccessKeyId` and `awsAccessKeySecret` of the user for step #4.
+
+4. In your Github repository's Settings, go to the Secrets section and add the following secrets (**naming must match exactly!**):
+
+- `roamEmail`
+- `roamPassword`
+- `awsBucketName`
+- `awsAccessKeyId`
+- `awsAccessKeySecret`
+
+_Don't worry! Your Roam and AWS credentials will be secure. GitHub [Secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) are encrypted, and provide a convenient methodology for storing secure data in repositories._
+
+5. Make a commit. It can be any commit, but this will start the process and trigger workflows.
+
+Congrats! 🎉 You've successfully automated the backup of your brain 🧠. Now go write about it in today's Daily Note!
+
+_NOTE: This is still fairly WIP, and this is my first project using Puppeteer, so it may be a little buggy._
 
 ## Development
 
