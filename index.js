@@ -23,6 +23,9 @@ const getDatabases =
 
 async function downloadDatabase(page, databaseName) {
   if (databaseName) await page.goto(roamBaseUrl + "app/" + databaseName);
+  console.log(databaseName, ':: Starting download');
+
+  await page.waitFor(5000);
 
   await page.waitForSelector(
     ".flex-h-box > div > .bp3-popover-wrapper > .bp3-popover-target > .bp3-small"
@@ -100,15 +103,7 @@ const generateExport = async () => {
     });
 
     await login(page);
-
-    const databases = await getDatabases(page);
-    console.log("Found the following databases", databases);
-    if (databases && databases.length) {
-      await Promise.all(databases.map(name => downloadDatabase(page, name)))
-    } else {
-      // single-database
-      await downloadDatabase(page)
-    }
+    await downloadDatabases(page);
   } catch (err) {
     console.error("Something went wrong!");
     console.error(err);
@@ -117,6 +112,19 @@ const generateExport = async () => {
   }
   await browser.close();
 };
+
+async function downloadDatabases(page) {
+  const databases = await getDatabases(page);
+  console.log("Found the following databases", databases);
+  if (databases && databases.length) {
+    for (const name of databases) {
+      await downloadDatabase(page, name)
+    }
+  } else {
+    // single-database
+    await downloadDatabase(page)
+  }
+}
 
 const uploadToS3 = async filename => {
   console.log(`Uploading ${filename} to S3`);
