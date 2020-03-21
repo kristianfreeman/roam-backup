@@ -94,7 +94,12 @@ async function login(page) {
 }
 
 const generateExport = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    env: {
+      TZ: 'Etc/GMT+12',
+      ...process.env
+    }
+  });
   const page = await browser.newPage();
   try {
     await page._client.send("Page.setDownloadBehavior", {
