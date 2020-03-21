@@ -114,6 +114,7 @@ const generateExport = async () => {
     console.error(err);
 
     await page.screenshot({path: "error.png"});
+    throw err
   }
   await browser.close();
 };
@@ -147,6 +148,7 @@ const uploadToS3 = async filename => {
   } catch (err) {
     console.error("Something went wrong while uploading to S3");
     console.error(err);
+    throw err
   }
 };
 
