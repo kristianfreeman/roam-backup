@@ -21,52 +21,33 @@ const getDatabases =
     "#app > div:nth-child(1) > div > h4:nth-child(1) > a:nth-child(1)",
     nodes => nodes.map(n => n.innerText));
 
+
 async function downloadDatabase(page, databaseName) {
+  async function waitAndClick(selector) {
+    await page.waitForSelector(selector);
+    await page.waitFor(100);
+    await page.click(selector);
+  }
+
   if (databaseName) await page.goto(roamBaseUrl + "app/" + databaseName);
   console.log(databaseName, ':: Starting download');
 
   await page.waitFor(10000);
 
-  await page.waitForSelector(
-    ".flex-h-box > div > .bp3-popover-wrapper > .bp3-popover-target > .bp3-small"
-  );
-  await page.click(
-    ".flex-h-box > div > .bp3-popover-wrapper > .bp3-popover-target > .bp3-small"
-  );
+  await waitAndClick(".flex-h-box > div > .bp3-popover-wrapper > .bp3-popover-target > .bp3-small");
 
   console.log(databaseName, ":: Opening Export menu");
 
-  await page.waitForSelector(
-    ".bp3-popover-content > .bp3-menu > li:nth-child(3) > .bp3-menu-item > .bp3-text-overflow-ellipsis"
-  );
-  await page.click(
-    ".bp3-popover-content > .bp3-menu > li:nth-child(3) > .bp3-menu-item > .bp3-text-overflow-ellipsis"
-  );
-
-  await page.waitForSelector(
-    ".bp3-popover-wrapper > .bp3-popover-target > div > .bp3-button > .bp3-button-text"
-  );
-  await page.click(
-    ".bp3-popover-wrapper > .bp3-popover-target > div > .bp3-button > .bp3-button-text"
-  );
+  await waitAndClick(".bp3-popover-content > .bp3-menu > li:nth-child(3) > .bp3-menu-item > .bp3-text-overflow-ellipsis");
+  await waitAndClick(".bp3-popover-wrapper > .bp3-popover-target > div > .bp3-button > .bp3-button-text");
 
   console.log(databaseName, ":: Selecting JSON export");
 
-  await page.waitForSelector(
-    "div > .bp3-menu > li > .bp3-menu-item > .bp3-text-overflow-ellipsis"
-  );
-  await page.click(
-    "div > .bp3-menu > li > .bp3-menu-item > .bp3-text-overflow-ellipsis"
-  );
+  await waitAndClick("div > .bp3-menu > li > .bp3-menu-item > .bp3-text-overflow-ellipsis");
 
   console.log(databaseName, ":: Creating export");
 
-  await page.waitForSelector(
-    ".bp3-dialog-container > .bp3-dialog > div > .flex-h-box > .bp3-intent-primary"
-  );
-  await page.click(
-    ".bp3-dialog-container > .bp3-dialog > div > .flex-h-box > .bp3-intent-primary"
-  );
+  await waitAndClick(".bp3-dialog-container > .bp3-dialog > div > .flex-h-box > .bp3-intent-primary");
 
   console.log(databaseName, ":: Created export");
 
