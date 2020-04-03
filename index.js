@@ -25,7 +25,7 @@ async function downloadDatabase(page, databaseName) {
   if (databaseName) await page.goto(roamBaseUrl + "app/" + databaseName);
   console.log(databaseName, ':: Starting download');
 
-  await page.waitFor(5000);
+  await page.waitFor(10000);
 
   await page.waitForSelector(
     ".flex-h-box > div > .bp3-popover-wrapper > .bp3-popover-target > .bp3-small"
@@ -161,4 +161,4 @@ const main = async function () {
   await Promise.all(files.map(uploadToS3))
 };
 
-main();
+main().then(r => console.log("success", r));
