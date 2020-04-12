@@ -32,7 +32,7 @@ async function downloadDatabase(page, databaseName) {
   if (databaseName) await page.goto(roamBaseUrl + "app/" + databaseName);
   console.log(databaseName, ':: Starting download');
 
-  await page.waitFor(10000);
+  await page.waitFor(15000);
 
   await waitAndClick(".flex-h-box > div > .bp3-popover-wrapper > .bp3-popover-target > .bp3-small");
 
