@@ -69,7 +69,7 @@ async function login(page) {
 
   await page.$eval(".bp3-button", el => el.click());
 
-  await page.waitFor(5000);
+  await page.waitFor(10000);
 
   console.log("Successfully logged in");
 }
