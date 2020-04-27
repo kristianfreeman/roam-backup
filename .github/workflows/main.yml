@@ -4,18 +4,17 @@ on:
   push:
     branches:
       - master
-  schedule:
-    - cron: "*/15 * * * *"
 
 jobs:
   backup:
     runs-on: ubuntu-latest
     name: Backup
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "12.x"
       - run: npm install
       - run: npm start
         env:
