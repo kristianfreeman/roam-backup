@@ -4,7 +4,7 @@ Automate backing up JSON copies of your [Roam Research](https://roamresearch.com
 
 Backups will be generated using Puppeteer and saved into the `backups` folder (`config.backupFolder`, can be changed) of an S3 bucket of your choice.
 
-*Note from the dev:* I'm using Roam more infrequently in favor of org-mode/plain text note-taking so this project is somewhat unmaintained. I'm looking for people to help test/update [this PR](https://github.com/signalnerve/roam-backup/pull/6) which fixes some outstanding issues. 
+**Note from the dev:** I'm using Roam more infrequently in favor of org-mode/plain text note-taking so this project is somewhat unmaintained. I'm looking for people to help test/update [this PR](https://github.com/signalnerve/roam-backup/pull/6) which fixes some outstanding issues. In addition, if you're a Roam power user and care about this stuff being maintained, I'm looking to add at least one collaborator to the project to help maintain it - [check out this ticket!](https://github.com/signalnerve/roam-backup/issues/15)
 
 ## Usage
 
